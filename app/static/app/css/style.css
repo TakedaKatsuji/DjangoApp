@@ -1,0 +1,16 @@
+/*  コード07  */
+/*  \test_pro\test_app\static\test_app\css\style.css  */
+
+body {
+    font-size:12pt;
+}
+
+h1 {
+    color:blue;
+    font-size:20pt;
+}
+
+p {
+    color:red;
+    font-size:14pt;
+}
