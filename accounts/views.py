@@ -1,7 +1,9 @@
 from django.contrib.auth import login, authenticate
-from django.views.generic import TemplateView, CreateView
+from django.http import HttpResponse
+from django.views.generic import TemplateView, CreateView, FormView
+from django.views import generic
 from django.urls import reverse_lazy
-from .forms import SignUpForm, LoginFrom
+from .forms import SignUpForm, LoginFrom, SigleUploadForm
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
 from django.urls import reverse_lazy
 
@@ -33,3 +35,17 @@ class LoginView(BaseLoginView):
 # LogoutViewを追加
 class LogoutView(BaseLogoutView):
     success_url = reverse_lazy("accounts:index")
+
+#UploadView
+class SigleUploadView(FormView):
+    form_class = SigleUploadForm
+    template_name = 'accounts/upload.html'
+    
+    def form_valid(self, form) :
+        download_url = form.save()
+        context = {
+            'download_url': download_url,
+            'form': form,
+        }
+        return self.render_to_response(context)
+    
