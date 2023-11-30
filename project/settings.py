@@ -101,7 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 #add
 AUTH_USER_MODEL = "accounts.User" # カスタムユーザーを認証用ユーザーとして登録
-
+LOGIN_REDIRECT_URL = "accounts:index"
+LOGOUT_REDIRECT_URL = "accounts:login"
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 

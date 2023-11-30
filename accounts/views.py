@@ -1,7 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.views.generic import TemplateView, CreateView
 from django.urls import reverse_lazy
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginFrom
+from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
+from django.urls import reverse_lazy
 
 
 class IndexView(TemplateView):
@@ -23,3 +25,11 @@ class SignupView(CreateView):
         user = authenticate(account_id=account_id, password=password)
         login(self.request, user)
         return response
+    
+class LoginView(BaseLoginView):
+    form_class = LoginFrom
+    template_name = "accounts/login.html"
+
+# LogoutViewを追加
+class LogoutView(BaseLogoutView):
+    success_url = reverse_lazy("accounts:index")
